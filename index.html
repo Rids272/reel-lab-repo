@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Reel Lab — Your AI Video Creator Journey</title>
 <meta name="theme-color" content="#1b1430">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Reel Lab">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -732,6 +739,11 @@ build();
 document.getElementById('copy-prompt').addEventListener('click',()=>copyText(document.getElementById('prompt-out').textContent));
 document.getElementById('clear-prompt').addEventListener('click',()=>{ids.forEach(i=>document.getElementById('f-'+i).value='');build()});
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copyText(document.getElementById(b.dataset.copy).textContent)));
+
+// PWA: offline support + installability
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}))}
+// keep saved progress from being auto-cleared by the browser
+if(navigator.storage&&navigator.storage.persist){navigator.storage.persist().catch(()=>{})}
 </script>
 </body>
 </html>

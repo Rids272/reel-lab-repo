@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "Reel Lab — AI Video Creator Journey",
+  "short_name": "Reel Lab",
+  "description": "A 3-month plan, prompt lab and toolkit for making AI video reels.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1b1430",
+  "theme_color": "#1b1430",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
