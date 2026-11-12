@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reel Lab — Your AI Video Creator Journey</title>
+<meta name="theme-color" content="#1b1430">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf6ef; --ink:#1b1430; --muted:#6b6380; --card:#ffffff; --line:#ece4d8;
+  --coral:#ff6b57; --violet:#7b5cff; --mint:#20c4a0; --sun:#ffb938; --pink:#ff5fa2;
+  --radius:20px; --shadow:0 6px 24px rgba(27,20,48,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;line-height:1.15}
+a{color:var(--violet)}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(27,20,48,.92);backdrop-filter:blur(10px)}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{flex:0 0 auto;color:#e9e4ff;text-decoration:none;font-size:13.5px;font-weight:600;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.08)}
+nav a:active,nav a:hover{background:var(--coral);color:#fff}
+
+/* hero */
+.hero{background:radial-gradient(120% 90% at 0% 0%,#3b2a7a 0%,#1b1430 55%),#1b1430;color:#fff;padding:44px 0 56px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-80px;top:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--coral),transparent 70%);opacity:.55}
+.hero:before{content:"";position:absolute;left:-60px;bottom:-90px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,var(--violet),transparent 70%);opacity:.6}
+.hero .wrap{position:relative;z-index:1}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.12);padding:6px 12px;border-radius:999px}
+.hero h1{font-size:clamp(34px,9vw,54px);margin:16px 0 12px;font-weight:800}
+.hero h1 span{background:linear-gradient(90deg,var(--sun),var(--coral),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:#d8d2f0;font-size:17px;max-width:560px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
+.stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px;text-align:center}
+.stat b{display:block;font-family:Fraunces,serif;font-size:24px}
+.stat small{color:#cfc8ea;font-size:12px}
+
+section{padding:40px 0 8px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral)}
+h2{font-size:clamp(26px,6.5vw,34px);margin:6px 0 10px}
+.lead{color:var(--muted);margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.card h3{font-size:20px;margin-bottom:6px}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;margin:0 6px 6px 0}
+.p-coral{background:#ffe7e3;color:#c43c2a}.p-violet{background:#ece6ff;color:#5a3ee0}.p-mint{background:#d9f7ef;color:#0f8a6f}.p-sun{background:#fff1d4;color:#a86a00}
+ul.clean{list-style:none}
+ul.clean li{padding-left:26px;position:relative;margin:8px 0}
+ul.clean li:before{content:"✦";position:absolute;left:4px;color:var(--coral);font-size:13px;top:2px}
+.note{border-left:4px solid var(--sun);background:#fff8e8;padding:12px 14px;border-radius:12px;font-size:15px;margin:12px 0}
+.note.v{border-color:var(--violet);background:#f3efff}
+.note.m{border-color:var(--mint);background:#e8faf5}
+
+/* routine */
+.routine{display:grid;gap:10px}
+.slot{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}
+.slot .t{flex:0 0 64px;height:64px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:800;font-family:Fraunces,serif;font-size:18px}
+.slot b{display:block}
+.slot span{color:var(--muted);font-size:14px}
+
+/* journey */
+.month{border-radius:24px;padding:20px 18px;margin-bottom:18px;color:#fff;position:relative;overflow:hidden}
+.m1{background:linear-gradient(135deg,#ff6b57,#ff5fa2)}
+.m2{background:linear-gradient(135deg,#7b5cff,#4b8bff)}
+.m3{background:linear-gradient(135deg,#14a88a,#20c4a0)}
+.month h3{font-size:24px}
+.month p{opacity:.92;font-size:15px}
+details.week{background:#fff;color:var(--ink);border-radius:16px;margin-top:12px;overflow:hidden}
+details.week summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:12px;font-weight:700}
+details.week summary::-webkit-details-marker{display:none}
+details.week summary .n{flex:0 0 38px;height:38px;border-radius:12px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:Fraunces,serif}
+details.week summary .ttl{flex:1}
+details.week summary .ttl small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+details.week summary .chev{transition:.2s}
+details.week[open] summary .chev{transform:rotate(180deg)}
+.wk{padding:0 16px 16px}
+.task{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px dashed var(--line)}
+.task input{appearance:none;flex:0 0 24px;height:24px;border-radius:8px;border:2px solid #cfc6db;margin-top:2px;cursor:pointer;display:grid;place-items:center}
+.task input:checked{background:var(--mint);border-color:var(--mint)}
+.task input:checked:after{content:"✓";color:#fff;font-weight:800;font-size:14px}
+.task label{cursor:pointer;font-size:15px}
+.task label b{display:block}
+.task label span{color:var(--muted);font-size:14px}
+.task input:checked+label b{text-decoration:line-through;opacity:.6}
+.bar{height:8px;background:rgba(255,255,255,.3);border-radius:99px;margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#fff;border-radius:99px;transition:width .3s}
+.barlabel{font-size:13px;margin-top:6px;opacity:.95}
+
+/* tools */
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tabs button{border:0;font:inherit;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px;background:#efe8dd;color:var(--ink);cursor:pointer}
+.tabs button.on{background:var(--ink);color:#fff}
+.tool{display:flex;gap:14px;align-items:flex-start}
+.tool .ic{flex:0 0 46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:22px}
+.tool h4{font-size:16px}
+.tool p{font-size:14.5px;color:var(--muted)}
+.tool a{font-size:14px;font-weight:700;text-decoration:none}
+.hide{display:none}
+
+/* prompt lab */
+.field{margin-bottom:12px}
+.field label{display:block;font-weight:700;font-size:14px;margin-bottom:5px}
+.field label small{font-weight:500;color:var(--muted)}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:15px;padding:11px 12px;border-radius:12px;border:1.5px solid var(--line);background:#fffdf9;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--violet)}
+.out{background:var(--ink);color:#f3efff;border-radius:16px;padding:16px;font-size:15px;min-height:90px;white-space:pre-wrap;word-wrap:break-word}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;font:inherit;font-weight:700;padding:12px 18px;border-radius:14px;cursor:pointer;background:var(--coral);color:#fff;margin-top:10px}
+.btn.ghost{background:#efe8dd;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chips button{border:1px solid var(--line);background:#fff;font:inherit;font-size:13px;padding:5px 10px;border-radius:999px;cursor:pointer}
+.chips button:active{background:var(--violet);color:#fff}
+
+pre.copy{background:#f5f0ff;border:1px solid #e2d9ff;border-radius:14px;padding:14px;font-size:13.5px;white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;color:#2d2350}
+.grid2{display:grid;gap:12px}
+@media(min-width:620px){.grid2{grid-template-columns:1fr 1fr}}
+.shot{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+.shot b{font-size:14px}
+.shot p{font-size:13.5px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+td,th{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.dont li:before{content:"✕";color:#d33}
+footer{padding:40px 0 60px;text-align:center;color:var(--muted);font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;transition:.25s;z-index:99}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a href="#start">Start</a>
+  <a href="#routine">2-Hour Day</a>
+  <a href="#journey">90-Day Plan</a>
+  <a href="#tools">Tools</a>
+  <a href="#prompt">Prompt Lab</a>
+  <a href="#story">Storyboard</a>
+  <a href="#edit">Editing</a>
+  <a href="#post">Posting</a>
+  <a href="#rules">Rules</a>
+  <a href="#learn">Learn More</a>
+</div></nav>
+
+<header class="hero" id="start">
+  <div class="wrap">
+    <span class="tag">🎬 Your creator journey</span>
+    <h1>Welcome to <span>Reel Lab</span></h1>
+    <p>You'll learn to make AI reels and shorts the way pros do: from idea, to prompt, to edit, to going live. No boring theory first. You make something on day one, post it soon, and level up from there.</p>
+    <div class="stats">
+      <div class="stat"><b>2 hrs</b><small>a day</small></div>
+      <div class="stat"><b>90</b><small>days</small></div>
+      <div class="stat"><b>₹0</b><small>month 1</small></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <span class="eyebrow">How this works</span>
+  <h2>Make first. Strategy later.</h2>
+  <p class="lead">Most courses start with niches, SEO and algorithms. We're flipping that, because seeing your own videos come alive is what keeps you going.</p>
+  <div class="card">
+    <ul class="clean">
+      <li><b>Month 1: Play (free tools).</b> Learn to generate, tell tiny stories, add sound, edit, and post. Any topic you like.</li>
+      <li><b>Month 2: Level up (paid tool).</b> Pick the tool you loved most, make better videos, and find what your audience likes.</li>
+      <li><b>Month 3: Go pro.</b> Titles, hashtags, timing, analytics, growth.</li>
+    </ul>
+    <div class="note m">✅ Tick tasks as you finish them. Your progress is saved on this phone.</div>
+  </div>
+</section>
+
+<!-- ROUTINE -->
+<section id="routine">
+  <span class="eyebrow">Your daily rhythm</span>
+  <h2>The 2-hour creator day</h2>
+  <p class="lead">Same structure every day. Most of the time goes to <b>making</b>, not watching.</p>
+  <div class="routine">
+    <div class="slot"><div class="t" style="background:var(--violet)">20m</div><div><b>Learn</b><span>Watch one tutorial or read one section of this guide.</span></div></div>
+    <div class="slot"><div class="t" style="background:var(--coral)">60m</div><div><b>Make</b><span>Write prompts and generate. Try today's lesson for real.</span></div></div>
+    <div class="slot"><div class="t" style="background:var(--pink)">30m</div><div><b>Edit / Post</b><span>Stitch, add sound and captions, or upload.</span></div></div>
+    <div class="slot"><div class="t" style="background:var(--mint)">10m</div><div><b>Journal</b><span>Save your best prompt and write one thing you learned.</span></div></div>
+  </div>
+  <div class="note v">💡 Keep a <b>Prompt Diary</b> (Google Keep or Notes): the prompt, the tool, and what worked or didn't. After a month this becomes your personal recipe book.</div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <span class="eyebrow">The 90-day plan</span>
+  <h2>Your journey, week by week</h2>
+  <p class="lead">Tap a week to open it. Each task fits inside one 2-hour day.</p>
+
+  <div class="month m1">
+    <span class="tag">Month 1 · Free tools</span>
+    <h3 style="margin-top:10px">Play & Create</h3>
+    <p>Generate, tell a tiny story, add sound, edit, post. Any topic. Quantity over perfection.</p>
+    <div class="bar"><i data-bar="m1"></i></div><div class="barlabel" data-barlabel="m1"></div>
+
+    <details class="week" open>
+      <summary><span class="n">1</span><span class="ttl">Make it move<small>Gen-AI basics and your first clips</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m1">
+        <div class="task"><input type="checkbox" id="w1d1"><label for="w1d1"><b>Day 1 · Set up</b><span>Open Google Flow (shared Pro plan), Gemini app, Kling and Hailuo. Watch a beginner Flow tutorial (see Learn More). Make any 1 clip.</span></label></div>
+        <div class="task"><input type="checkbox" id="w1d2"><label for="w1d2"><b>Day 2 · Anatomy of a prompt</b><span>Learn the 7 parts (see Prompt Lab). Make one prompt, then change ONE part at a time and compare results.</span></label></div>
+        <div class="task"><input type="checkbox" id="w1d3"><label for="w1d3"><b>Day 3 · Camera language</b><span>Same subject, 5 shots: wide, close-up, low angle, drone, tracking. See how the mood changes.</span></label></div>
+        <div class="task"><input type="checkbox" id="w1d4"><label for="w1d4"><b>Day 4 · Light & style</b><span>Same scene as golden hour, neon night, rainy, 3D animation, and anime style.</span></label></div>
+        <div class="task"><input type="checkbox" id="w1d5"><label for="w1d5"><b>Day 5 · Sound in the prompt</b><span>Veo creates audio too. Add ambient sound, an SFX, and one line of dialogue to your prompts.</span></label></div>
+        <div class="task"><input type="checkbox" id="w1d6"><label for="w1d6"><b>Day 6 · Tool face-off</b><span>Run the same prompt in Flow, Kling and Hailuo. Note which one looks best for what.</span></label></div>
+        <div class="task"><input type="checkbox" id="w1d7"><label for="w1d7"><b>Day 7 · Review</b><span>Pick your 3 favourite clips. Copy their prompts into your Prompt Diary.</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">2</span><span class="ttl">Tell a tiny story<small>Storyboards, scenes and consistent characters</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m1">
+        <div class="task"><input type="checkbox" id="w2d1"><label for="w2d1"><b>Day 1 · Story shape</b><span>Learn Hook → Build → Payoff. Watch 10 viral AI reels and write down each one's hook.</span></label></div>
+        <div class="task"><input type="checkbox" id="w2d2"><label for="w2d2"><b>Day 2 · Storyboard</b><span>Use the Storyboard helper prompt with Claude or Gemini to turn one idea into 4–6 scenes.</span></label></div>
+        <div class="task"><input type="checkbox" id="w2d3"><label for="w2d3"><b>Day 3 · Character sheet</b><span>Make your main character in Nano Banana (Gemini/Flow): front, side, close-up, full body. Same outfit.</span></label></div>
+        <div class="task"><input type="checkbox" id="w2d4"><label for="w2d4"><b>Day 4 · Keep them the same</b><span>Use the character images with "Ingredients to Video" or "Frames to Video" in Flow, or image-to-video in Kling.</span></label></div>
+        <div class="task"><input type="checkbox" id="w2d5"><label for="w2d5"><b>Day 5 · Linked clips</b><span>Try hand-over-hand: use the last frame of clip 1 as the first frame of clip 2 for a smooth flow.</span></label></div>
+        <div class="task"><input type="checkbox" id="w2d6"><label for="w2d6"><b>Day 6 · Generate your story</b><span>Make every scene from your storyboard. Re-roll the weak ones.</span></label></div>
+        <div class="task"><input type="checkbox" id="w2d7"><label for="w2d7"><b>Day 7 · Review</b><span>Watch the clips in order. Does it feel like a story? Note what's missing.</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">3</span><span class="ttl">Sound & Cut<small>Voice, music and editing into a 30s reel</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m1">
+        <div class="task"><input type="checkbox" id="w3d1"><label for="w3d1"><b>Day 1 · Voiceover</b><span>Write a 30-second script (~75 words). Make it with ElevenLabs (free) and try 3 voices.</span></label></div>
+        <div class="task"><input type="checkbox" id="w3d2"><label for="w3d2"><b>Day 2 · Music & SFX</b><span>Make a background track in Suno (free) or pick royalty-free music. Match the mood.</span></label></div>
+        <div class="task"><input type="checkbox" id="w3d3"><label for="w3d3"><b>Day 3 · Editor basics</b><span>Install VN Editor or Edits (Instagram). Learn import, trim, split, reorder, export.</span></label></div>
+        <div class="task"><input type="checkbox" id="w3d4"><label for="w3d4"><b>Day 4 · Stitch</b><span>Put week 2's clips together. Cut on motion. Add voice and music. Aim for 25–35s.</span></label></div>
+        <div class="task"><input type="checkbox" id="w3d5"><label for="w3d5"><b>Day 5 · Captions & text</b><span>Add auto-captions, a big hook text in the first second, and a short ending line.</span></label></div>
+        <div class="task"><input type="checkbox" id="w3d6"><label for="w3d6"><b>Day 6 · 🎉 First post!</b><span>Upload it to Instagram Reels and YouTube Shorts using the Basic Upload checklist. Turn on the AI label.</span></label></div>
+        <div class="task"><input type="checkbox" id="w3d7"><label for="w3d7"><b>Day 7 · Rest & look</b><span>Check views after 48 hrs. Don't judge yourself. Just notice.</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">4</span><span class="ttl">Post & Listen<small>Try different styles and see what people like</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m1">
+        <div class="task"><input type="checkbox" id="w4d1"><label for="w4d1"><b>Reel A · Cinematic</b><span>A beautiful scene, like a travel spot, nature or a dreamy city. Music only.</span></label></div>
+        <div class="task"><input type="checkbox" id="w4d2"><label for="w4d2"><b>Reel B · Funny</b><span>An animal or everyday situation with a twist ending.</span></label></div>
+        <div class="task"><input type="checkbox" id="w4d3"><label for="w4d3"><b>Reel C · Satisfying / ASMR</b><span>Slicing, melting, pouring, tiny worlds. Strong sound effects.</span></label></div>
+        <div class="task"><input type="checkbox" id="w4d4"><label for="w4d4"><b>Reel D · Mini story</b><span>A character with a small problem and a sweet payoff. Voiceover.</span></label></div>
+        <div class="task"><input type="checkbox" id="w4d5"><label for="w4d5"><b>Reel E · Your own idea</b><span>Anything you want to see exist.</span></label></div>
+        <div class="task"><input type="checkbox" id="w4d6"><label for="w4d6"><b>Day 6 · Scorecard</b><span>Fill the Results table (Posting section) for each reel: views, average watch time, likes, shares.</span></label></div>
+        <div class="task"><input type="checkbox" id="w4d7"><label for="w4d7"><b>Day 7 · 🎁 Choose your paid tool</b><span>Which tool gave your best clips? Tell your brother. That's your gift for month 2.</span></label></div>
+      </div>
+    </details>
+  </div>
+
+  <div class="month m2">
+    <span class="tag">Month 2 · Paid tool</span>
+    <h3 style="margin-top:10px">Level Up</h3>
+    <p>Better quality, longer stories, and finding your style.</p>
+    <div class="bar"><i data-bar="m2"></i></div><div class="barlabel" data-barlabel="m2"></div>
+
+    <details class="week">
+      <summary><span class="n">5</span><span class="ttl">Pro generation<small>Quality models and advanced prompts</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m2">
+        <div class="task"><input type="checkbox" id="w5a"><label for="w5a"><b>Quality vs fast models</b><span>Draft on cheap/fast models, then make the final shots only on the quality model.</span></label></div>
+        <div class="task"><input type="checkbox" id="w5b"><label for="w5b"><b>Camera moves</b><span>Dolly in, orbit, crane up, handheld, whip pan. Make one reel that uses 4 different moves.</span></label></div>
+        <div class="task"><input type="checkbox" id="w5c"><label for="w5c"><b>Negative prompts</b><span>List what you don't want (e.g. "text, watermark, extra fingers") instead of writing "no …".</span></label></div>
+        <div class="task"><input type="checkbox" id="w5d"><label for="w5d"><b>Prompt templates</b><span>Turn your 5 best prompts into fill-in-the-blank templates in your Diary.</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">6</span><span class="ttl">Characters & dialogue<small>Talking scenes, lip-sync, multiple people</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m2">
+        <div class="task"><input type="checkbox" id="w6a"><label for="w6a"><b>Dialogue scene</b><span>Two characters with 2–3 short lines each. Write who says what, in quotes.</span></label></div>
+        <div class="task"><input type="checkbox" id="w6b"><label for="w6b"><b>Recurring character</b><span>Make one character you can use in many reels. Give them a name and personality.</span></label></div>
+        <div class="task"><input type="checkbox" id="w6c"><label for="w6c"><b>60-second story</b><span>8–10 scenes, with a secondary hook around 15s to keep people watching.</span></label></div>
+        <div class="task"><input type="checkbox" id="w6d"><label for="w6d"><b>Series idea</b><span>Plan a 3-part mini-series with the same character. End each part with "Part 2?"</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">7</span><span class="ttl">Find your lane<small>Choosing a niche from real data</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m2">
+        <div class="task"><input type="checkbox" id="w7a"><label for="w7a"><b>Read your results</b><span>Which style had the best average watch time and the most shares? That's your clue.</span></label></div>
+        <div class="task"><input type="checkbox" id="w7b"><label for="w7b"><b>Study 5 creators</b><span>Find 5 AI creators in that style. Note their hooks, length, posting frequency and covers.</span></label></div>
+        <div class="task"><input type="checkbox" id="w7c"><label for="w7c"><b>Content pillars</b><span>Choose 3 repeatable themes, e.g. "cozy animal stories, tiny worlds, mythology retold".</span></label></div>
+        <div class="task"><input type="checkbox" id="w7d"><label for="w7d"><b>Profile glow-up</b><span>Name, bio, profile picture and highlights that match your lane.</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">8</span><span class="ttl">Ideas & hooks<small>Never run out of ideas</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m2">
+        <div class="task"><input type="checkbox" id="w8a"><label for="w8a"><b>Idea bank</b><span>Write 30 ideas: trends, festivals, "what if…", or remixing your best reel.</span></label></div>
+        <div class="task"><input type="checkbox" id="w8b"><label for="w8b"><b>Trend spotting</b><span>Check Reels trending audio, YouTube search suggestions and Google Trends once a week.</span></label></div>
+        <div class="task"><input type="checkbox" id="w8c"><label for="w8c"><b>Hook practice</b><span>Write 10 hooks for one idea and pick the strongest. Use the hook formulas in the Storyboard section.</span></label></div>
+        <div class="task"><input type="checkbox" id="w8d"><label for="w8d"><b>Batch day</b><span>Script and storyboard 4 reels in one session, then generate across the week.</span></label></div>
+      </div>
+    </details>
+  </div>
+
+  <div class="month m3">
+    <span class="tag">Month 3 · Go pro</span>
+    <h3 style="margin-top:10px">Publish & Grow</h3>
+    <p>Now the "boring" stuff, which suddenly matters because you have real videos.</p>
+    <div class="bar"><i data-bar="m3"></i></div><div class="barlabel" data-barlabel="m3"></div>
+
+    <details class="week">
+      <summary><span class="n">9</span><span class="ttl">Titles, tags & covers<small>Getting discovered</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m3">
+        <div class="task"><input type="checkbox" id="w9a"><label for="w9a"><b>Titles that make people tap</b><span>Short, curious, with a keyword. Write 5 per video and choose one.</span></label></div>
+        <div class="task"><input type="checkbox" id="w9b"><label for="w9b"><b>Captions & keywords</b><span>Instagram now works like search. Put real keywords in your caption. Use max 5 hashtags.</span></label></div>
+        <div class="task"><input type="checkbox" id="w9c"><label for="w9c"><b>Covers in Canva</b><span>Make a cover template so your grid looks consistent.</span></label></div>
+        <div class="task"><input type="checkbox" id="w9d"><label for="w9d"><b>Shorts extras</b><span>Link Shorts to a related video, add a pinned comment, make playlists.</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">10</span><span class="ttl">Timing & schedule<small>Being consistent without burning out</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m3">
+        <div class="task"><input type="checkbox" id="w10a"><label for="w10a"><b>Test posting times</b><span>Start with weekday evenings (about 7–9 PM IST), then follow your own Insights.</span></label></div>
+        <div class="task"><input type="checkbox" id="w10b"><label for="w10b"><b>Weekly schedule</b><span>Pick a pace you can keep, e.g. 3–4 reels a week. Consistency beats bursts.</span></label></div>
+        <div class="task"><input type="checkbox" id="w10c"><label for="w10c"><b>Schedule ahead</b><span>Use Meta Business Suite and YouTube Studio scheduling on weekends.</span></label></div>
+        <div class="task"><input type="checkbox" id="w10d"><label for="w10d"><b>Cross-posting</b><span>Upload natively to each platform, without another app's watermark.</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">11</span><span class="ttl">Analytics<small>Reading what the numbers say</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m3">
+        <div class="task"><input type="checkbox" id="w11a"><label for="w11a"><b>Retention graph</b><span>In YouTube Studio, find where people drop. A cliff in the first 3 seconds means a weak hook.</span></label></div>
+        <div class="task"><input type="checkbox" id="w11b"><label for="w11b"><b>Swiped away vs viewed</b><span>Shorts show how many chose to watch. Try to grow that number.</span></label></div>
+        <div class="task"><input type="checkbox" id="w11c"><label for="w11c"><b>Shares & saves</b><span>On Instagram these are gold. Which reels got shared?</span></label></div>
+        <div class="task"><input type="checkbox" id="w11d"><label for="w11d"><b>Flop or hit?</b><span>Flop: change the hook first. Hit: make 2 more in the same style, but not copies.</span></label></div>
+      </div>
+    </details>
+
+    <details class="week">
+      <summary><span class="n">12</span><span class="ttl">Community & next steps<small>Building a real audience</small></span><span class="chev">⌄</span></summary>
+      <div class="wk" data-month="m3">
+        <div class="task"><input type="checkbox" id="w12a"><label for="w12a"><b>Reply to comments</b><span>Reply in the first hour. Turn good comments into new video ideas.</span></label></div>
+        <div class="task"><input type="checkbox" id="w12b"><label for="w12b"><b>Stories & behind-the-scenes</b><span>Show your prompts and before/after. People love seeing how it's made.</span></label></div>
+        <div class="task"><input type="checkbox" id="w12c"><label for="w12c"><b>Collab</b><span>Message one small creator in your lane about a collab reel.</span></label></div>
+        <div class="task"><input type="checkbox" id="w12d"><label for="w12d"><b>90-day review</b><span>Your best 3 reels, what you learned, and your goal for the next 90 days.</span></label></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <span class="eyebrow">Your toolkit</span>
+  <h2>Tools: free first</h2>
+  <p class="lead">Free tiers change often. If something below has changed, just use whatever is free that week.</p>
+  <div class="tabs" id="tooltabs">
+    <button class="on" data-t="gen">🎥 Video</button>
+    <button data-t="img">🖼 Images</button>
+    <button data-t="aud">🎧 Audio</button>
+    <button data-t="ed">✂️ Editing</button>
+    <button data-t="pro">💎 Month 2</button>
+  </div>
+
+  <div data-panel="gen">
+    <div class="card tool"><div class="ic" style="background:#ece6ff">🌊</div><div>
+      <h4>Google Flow + Veo 3.1 <span class="pill p-violet">Main tool</span></h4>
+      <p>Google's AI filmmaking studio. It makes video <i>with sound</i>, and has Text to Video, Frames to Video (start/end image) and Ingredients to Video (your character images). Shared through your brother's Google AI Pro family plan: 1,000 credits a month for the whole family.</p>
+      <p><b>Credit maths:</b> Lite ≈ 10 credits, Fast ≈ 20, Quality ≈ 100 per clip. Draft on Lite/Fast. Use Quality only for a final hero shot. Prompts in English.</p>
+      <a href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener">Open Flow →</a></div></div>
+    <div class="card tool"><div class="ic" style="background:#ffe7e3">⚡</div><div>
+      <h4>Kling AI <span class="pill p-mint">Free daily credits</span></h4>
+      <p>Great cinematic motion. The free tier refills daily (about 66 credits, around 3–6 short clips), 720p with a watermark. Perfect for daily practice so Flow credits last longer.</p>
+      <a href="https://klingai.com" target="_blank" rel="noopener">Open Kling →</a></div></div>
+    <div class="card tool"><div class="ic" style="background:#d9f7ef">🌀</div><div>
+      <h4>Hailuo (MiniMax) <span class="pill p-mint">Free</span></h4>
+      <p>Strong at realistic people and expressive motion. Free clips are short and watermarked. Good for comparing results.</p>
+      <a href="https://hailuoai.video" target="_blank" rel="noopener">Open Hailuo →</a></div></div>
+    <div class="card tool"><div class="ic" style="background:#fff1d4">✨</div><div>
+      <h4>Pika <span class="pill p-mint">Free monthly</span></h4>
+      <p>Fun effects and transformations for playful, short social clips.</p>
+      <a href="https://pika.art" target="_blank" rel="noopener">Open Pika →</a></div></div>
+  </div>
+
+  <div data-panel="img" class="hide">
+    <div class="card tool"><div class="ic" style="background:#fff1d4">🍌</div><div>
+      <h4>Nano Banana (in Gemini & Flow)</h4>
+      <p>Google's image model. Best for <b>character sheets</b> and keeping the same face and outfit. Make the character once, then edit poses and backgrounds while always referring to the original image.</p>
+      <a href="https://gemini.google.com" target="_blank" rel="noopener">Open Gemini →</a></div></div>
+    <div class="card tool"><div class="ic" style="background:#ece6ff">🧠</div><div>
+      <h4>Claude or Gemini (chat)</h4>
+      <p>Your <b>writer and director</b>. Turn an idea into a storyboard, scene prompts and a voiceover script. Use the helper prompt in the Storyboard section.</p>
+      <a href="https://claude.ai" target="_blank" rel="noopener">Open Claude →</a></div></div>
+    <div class="card tool"><div class="ic" style="background:#ffe7e3">🎨</div><div>
+      <h4>Canva (you already know it!)</h4>
+      <p>Reel covers, thumbnails and text overlays. Your Canva Pro skills transfer straight over.</p>
+      <a href="https://www.canva.com" target="_blank" rel="noopener">Open Canva →</a></div></div>
+  </div>
+
+  <div data-panel="aud" class="hide">
+    <div class="card tool"><div class="ic" style="background:#ece6ff">🎙</div><div>
+      <h4>ElevenLabs <span class="pill p-mint">Free 10k chars/month</span></h4>
+      <p>The most natural AI voices. 10,000 characters is about 13 thirty-second voiceovers a month. Free use is non-commercial, which is fine while learning.</p>
+      <a href="https://elevenlabs.io" target="_blank" rel="noopener">Open ElevenLabs →</a></div></div>
+    <div class="card tool"><div class="ic" style="background:#ffe7e3">🎵</div><div>
+      <h4>Suno <span class="pill p-mint">Free ~10 songs/day</span></h4>
+      <p>Make background music or full songs from a text description. Free songs are non-commercial.</p>
+      <a href="https://suno.com" target="_blank" rel="noopener">Open Suno →</a></div></div>
+    <div class="card tool"><div class="ic" style="background:#d9f7ef">🔊</div><div>
+      <h4>Veo's own audio</h4>
+      <p>Flow clips can include sound effects, ambience and dialogue. Just describe it in the prompt.</p></div></div>
+    <div class="card tool"><div class="ic" style="background:#fff1d4">📻</div><div>
+      <h4>Platform music libraries</h4>
+      <p>Instagram's trending audio and the YouTube Audio Library are safe, free, and help reach.</p></div></div>
+  </div>
+
+  <div data-panel="ed" class="hide">
+    <div class="note">⚠️ <b>CapCut is banned in India</b>, so most tutorials that use it won't apply directly. These do the same job:</div>
+    <div class="card tool"><div class="ic" style="background:#ece6ff">🎞</div><div>
+      <h4>VN Video Editor <span class="pill p-mint">Free · no watermark</span></h4>
+      <p>The closest CapCut replacement: multi-track timeline, 4K export, no watermark. Your main editor.</p>
+      <a href="https://www.vlognow.me" target="_blank" rel="noopener">Get VN →</a></div></div>
+    <div class="card tool"><div class="ic" style="background:#ffe7e3">📱</div><div>
+      <h4>Edits (by Instagram) <span class="pill p-mint">Free</span></h4>
+      <p>Made by the Instagram team for Reels. Safe-zone guides so text isn't hidden, auto-captions, direct posting and stats. Search "Edits" in the Play Store or App Store.</p></div></div>
+    <div class="card tool"><div class="ic" style="background:#d9f7ef">🖥</div><div>
+      <h4>DaVinci Resolve <span class="pill p-sun">Later · laptop</span></h4>
+      <p>Professional free desktop editor. Only once you've outgrown phone editing.</p></div></div>
+  </div>
+
+  <div data-panel="pro" class="hide">
+    <div class="card">
+      <h3>🎁 Picking your paid tool</h3>
+      <p class="lead" style="margin:6px 0 10px">At the end of week 4, choose based on <b>your own clips</b>, not hype:</p>
+      <table>
+        <tr><th>If you loved…</th><th>Upgrade to</th></tr>
+        <tr><td>Flow / Veo results</td><td>More Google AI credits (top-up or higher plan)</td></tr>
+        <tr><td>Kling's motion</td><td>Kling Standard plan</td></tr>
+        <tr><td>Realistic people</td><td>Hailuo paid plan</td></tr>
+        <tr><td>Voiceovers</td><td>ElevenLabs Starter</td></tr>
+        <tr><td>Music</td><td>Suno Pro (commercial rights)</td></tr>
+      </table>
+      <div class="note v" style="margin-top:14px">One great tool beats five average ones. Go deep on one first.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPT LAB -->
+<section id="prompt">
+  <span class="eyebrow">Interactive</span>
+  <h2>Prompt Lab 🧪</h2>
+  <p class="lead">Google's own Veo guide says the best prompts are broken into clear parts. Fill these in, tap a chip for ideas, and copy the result into Flow or Kling.</p>
+  <div class="card">
+    <div class="field"><label>1 · Shot <small>how close?</small></label>
+      <input id="f-shot" placeholder="e.g. Close-up shot">
+      <div class="chips" data-for="f-shot"><button>Wide shot</button><button>Medium shot</button><button>Close-up</button><button>Extreme close-up</button><button>Low-angle shot</button><button>Aerial drone shot</button><button>POV shot</button></div></div>
+    <div class="field"><label>2 · Subject <small>who/what — be specific</small></label>
+      <input id="f-subject" placeholder="e.g. a small orange kitten wearing a tiny red scarf"></div>
+    <div class="field"><label>3 · Action <small>what happens</small></label>
+      <input id="f-action" placeholder="e.g. tries to catch falling snowflakes and tumbles into the snow"></div>
+    <div class="field"><label>4 · Setting <small>where & when</small></label>
+      <input id="f-scene" placeholder="e.g. a cozy Himalayan village street at dusk">
+      <div class="chips" data-for="f-scene"><button>at golden hour</button><button>on a rainy night</button><button>in a neon-lit city</button><button>in a misty forest</button><button>in a tiny miniature world</button></div></div>
+    <div class="field"><label>5 · Camera move</label>
+      <input id="f-camera" placeholder="e.g. slow dolly in">
+      <div class="chips" data-for="f-camera"><button>slow dolly in</button><button>tracking shot following the subject</button><button>orbit around the subject</button><button>crane shot rising up</button><button>handheld</button><button>static camera</button></div></div>
+    <div class="field"><label>6 · Style & light</label>
+      <input id="f-style" placeholder="e.g. cinematic, warm soft light, shallow depth of field">
+      <div class="chips" data-for="f-style"><button>cinematic, shallow depth of field</button><button>Pixar-style 3D animation</button><button>anime style</button><button>documentary realism</button><button>vintage film look</button><button>dreamy pastel colors</button></div></div>
+    <div class="field"><label>7 · Audio <small>Veo makes sound!</small></label>
+      <input id="f-audio" placeholder="e.g. soft wind, crunching snow, a tiny meow">
+      <div class="chips" data-for="f-audio"><button>soft ambient music</button><button>birds chirping</button><button>rain and distant thunder</button><button>crowd chatter</button><button>no music, only natural sounds</button></div></div>
+    <div class="field"><label>Avoid <small>list things, don't write "no…"</small></label>
+      <input id="f-neg" placeholder="e.g. text, watermark, blurry, extra limbs"></div>
+    <div class="out" id="prompt-out">Your prompt will appear here as you type…</div>
+    <button class="btn" id="copy-prompt">📋 Copy prompt</button>
+    <button class="btn ghost" id="clear-prompt">Clear</button>
+  </div>
+  <div class="note v">🎯 <b>Golden rule:</b> change only ONE part at a time when a clip isn't right. That's how you learn what each word does.</div>
+</section>
+
+<!-- STORYBOARD -->
+<section id="story">
+  <span class="eyebrow">Telling stories</span>
+  <h2>From idea to storyboard</h2>
+  <p class="lead">AI clips are only 5–10 seconds long. A 30-second reel is just <b>4–6 short scenes</b> that tell one story.</p>
+
+  <div class="card">
+    <h3>The 3-part reel shape</h3>
+    <table>
+      <tr><th>Part</th><th>Time</th><th>Job</th></tr>
+      <tr><td><b>Hook</b></td><td>0–3s</td><td>Stop the scroll: surprising visual, motion, or a question on screen. Viewers decide in about 1–2 seconds.</td></tr>
+      <tr><td><b>Build</b></td><td>3–25s</td><td>The journey. Change the shot every 2–4 seconds. Add a mini-surprise around 15s.</td></tr>
+      <tr><td><b>Payoff</b></td><td>last 5s</td><td>Twist, reveal, smile, or a loop back to the start so people rewatch.</td></tr>
+    </table>
+    <div class="note m" style="margin-top:12px">⏱ Best length to start: <b>15–35 seconds</b>. A 30s reel that people watch to the end beats a 60s one they leave halfway.</div>
+  </div>
+
+  <div class="card">
+    <h3>Hook formulas</h3>
+    <ul class="clean">
+      <li><b>Start mid-action:</b> open on the most dramatic moment, then show how it got there.</li>
+      <li><b>"What if…":</b> "What if cats ran a chai stall?"</li>
+      <li><b>Impossible visual:</b> a whale swimming through clouds above Mumbai.</li>
+      <li><b>Before / after:</b> show the ending first, then rewind.</li>
+      <li><b>Curiosity text:</b> "Wait for the end 😳" or "Part 1 of a story nobody expected".</li>
+    </ul>
+    <div class="note">🚫 Never start with an intro card, a logo, or a slow wide shot. Those cause the biggest drop-off.</div>
+  </div>
+
+  <div class="card">
+    <h3>Don't repeat yourself: shot variety</h3>
+    <p class="lead" style="margin-bottom:10px">Use at least 3 different shot types in every reel:</p>
+    <div class="grid2">
+      <div class="shot"><b>🏔 Establishing</b><p>Wide shot that shows where we are.</p></div>
+      <div class="shot"><b>🙂 Close-up</b><p>Face or emotion. Makes people care.</p></div>
+      <div class="shot"><b>✋ Detail</b><p>Hands, objects, textures.</p></div>
+      <div class="shot"><b>👀 POV / reaction</b><p>What the character sees, or how they react.</p></div>
+      <div class="shot"><b>🎢 Movement</b><p>Tracking, drone or orbit for energy.</p></div>
+      <div class="shot"><b>✨ Reveal</b><p>Camera pulls back or turns to show the surprise.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🤖 Storyboard helper prompt</h3>
+    <p class="lead" style="margin-bottom:10px">Paste this into Claude or Gemini and change the idea on the first line:</p>
+<pre class="copy" id="sb-prompt">My reel idea: [a lonely robot finds a flower in a desert city]
+
+Act as a short-form video director. Create a storyboard for a 30-second vertical (9:16) Instagram Reel / YouTube Short made with AI video clips of 8 seconds or less.
+
+Give me:
+1. A one-line HOOK for the first 2 seconds.
+2. A CHARACTER DESCRIPTION I can reuse word-for-word in every prompt (look, clothes, colours).
+3. 5 scenes. For each: shot type, what happens, camera movement, and the full video prompt (subject, action, setting, camera, style/lighting, audio).
+4. A voiceover script under 75 words (optional).
+5. On-screen text for the hook and the ending.
+Use a different shot type in each scene so it doesn't feel repetitive, and end with a twist or a loop.</pre>
+    <button class="btn" data-copy="sb-prompt">📋 Copy helper prompt</button>
+  </div>
+
+  <div class="card">
+    <h3>Keeping characters the same</h3>
+    <ul class="clean">
+      <li><b>Character first:</b> make the character image before any scenes, and lock their look.</li>
+      <li><b>Character sheet:</b> in Nano Banana, ask for front, side, close-up and full body on one plain background. Always edit from the <i>original</i> image, not the last edit, or the face slowly drifts.</li>
+      <li><b>Reuse the same description:</b> copy the exact character text into every prompt.</li>
+      <li><b>Use reference features:</b> Flow's Ingredients to Video or Frames to Video, or Kling's start/end frame.</li>
+      <li><b>Hand-over-hand:</b> grab the last frame of a clip and use it as the first frame of the next one for smooth continuity.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- EDITING -->
+<section id="edit">
+  <span class="eyebrow">Editing</span>
+  <h2>Turning clips into a reel</h2>
+  <div class="card">
+    <h3>The edit, step by step</h3>
+    <ul class="clean">
+      <li><b>Project 9:16</b> (1080×1920). Import clips in storyboard order.</li>
+      <li><b>Trim hard.</b> Cut the slow first and last half-second of every clip. AI clips often start and end sluggishly.</li>
+      <li><b>Cut on motion.</b> Join two clips while something is moving, so the cut hides itself.</li>
+      <li><b>Voice first, then music.</b> Keep music low (about 15–25% volume) under the voice.</li>
+      <li><b>Cut to the beat.</b> Place cuts on the music's beats for an energetic feel.</li>
+      <li><b>Captions.</b> Big, high-contrast, 2–4 words at a time. Many people watch on mute.</li>
+      <li><b>Safe zone.</b> Keep text away from the bottom 20% and the right edge, where the buttons sit.</li>
+      <li><b>Fix weird AI moments.</b> Melting hands or a glitchy face? Cut it or re-generate that clip.</li>
+      <li><b>Export</b> 1080p, 30fps, without another app's watermark.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Before you export: quick check</h3>
+    <ul class="clean">
+      <li>Is something interesting happening in the very first second?</li>
+      <li>Do any 2 clips in a row look the same? Change one.</li>
+      <li>Did I watch it once with sound off, and does it still make sense?</li>
+      <li>Is the ending satisfying, or does it loop?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- POSTING -->
+<section id="post">
+  <span class="eyebrow">Going live</span>
+  <h2>Uploading like a pro</h2>
+
+  <div class="card">
+    <h3>📸 Instagram Reels checklist</h3>
+    <ul class="clean">
+      <li>Write a <b>caption with real keywords</b> (what's in the video). Instagram search reads it.</li>
+      <li>Use <b>3–5 specific hashtags</b> (5 is the maximum now). Hashtags help search, not reach.</li>
+      <li>Pick a <b>cover</b> with a clear subject and a few words.</li>
+      <li>Turn on the <b>AI label</b> ("AI info") for AI-made content.</li>
+      <li>Add trending audio, or your own sound.</li>
+      <li>Reply to comments in the first hour.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>▶️ YouTube Shorts checklist</h3>
+    <ul class="clean">
+      <li><b>Title:</b> short and curious, with one keyword, e.g. "The Robot Who Found the Last Flower 🌼".</li>
+      <li><b>Description:</b> 1–2 lines and 2–3 hashtags.</li>
+      <li>Answer <b>"Altered or synthetic content"</b> honestly. Tick it for realistic AI scenes.</li>
+      <li>Shorts can be up to 3 minutes, but 15–35s usually gets watched to the end most.</li>
+      <li>Add it to a playlist, and pin a comment that asks a question.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🕖 When to post (India)</h3>
+    <p>Studies point to <b>weekday evenings around 7–9 PM IST</b>, with Saturday evening also strong. Treat this as a starting point. After about 10 posts, your own Insights and YouTube Studio data will show <i>your</i> audience's best time.</p>
+  </div>
+
+  <div class="card">
+    <h3>📊 Results scorecard (copy into your Diary)</h3>
+    <table>
+      <tr><th>Reel</th><th>Style</th><th>Views</th><th>Avg watch</th><th>Shares</th></tr>
+      <tr><td>A</td><td>Cinematic</td><td></td><td></td><td></td></tr>
+      <tr><td>B</td><td>Funny</td><td></td><td></td><td></td></tr>
+      <tr><td>C</td><td>Satisfying</td><td></td><td></td><td></td></tr>
+      <tr><td>D</td><td>Mini story</td><td></td><td></td><td></td></tr>
+    </table>
+    <div class="note" style="margin-top:12px">Look at <b>average watch time</b> and <b>shares</b> more than likes. They show what people actually loved.</div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section id="rules">
+  <span class="eyebrow">Stay safe</span>
+  <h2>Rules that protect your account</h2>
+  <div class="card">
+    <h3>✅ Do</h3>
+    <ul class="clean">
+      <li><b>Label AI content.</b> Both platforms ask for it. On Instagram, accounts featuring AI-generated people without the label get their reach limited.</li>
+      <li><b>Be original.</b> Instagram stops recommending accounts that mostly repost, and YouTube won't monetize repetitive, mass-produced videos. AI itself is allowed.</li>
+      <li><b>Make each reel feel different:</b> new story, new shots, your own twist.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>❌ Don't</h3>
+    <ul class="clean dont">
+      <li>Make realistic fake videos of real people, celebrities or politicians.</li>
+      <li>Make fake news or "real event" videos that could fool people.</li>
+      <li>Use cartoon or movie characters, brand logos, or copyrighted songs.</li>
+      <li>Post 20 near-identical videos from one template.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- LEARN -->
+<section id="learn">
+  <span class="eyebrow">Keep learning</span>
+  <h2>Best places to learn</h2>
+  <div class="card">
+    <h3>Start here (free)</h3>
+    <ul class="clean">
+      <li><a href="https://kevinstratvert.com/2026/07/07/how-to-use-google-flow-step-by-step-tutorial/" target="_blank" rel="noopener">How to Use Google Flow, step by step</a> — Kevin Stratvert</li>
+      <li><a href="https://www.udemy.com/course/google-flow-tutorial-free-course/" target="_blank" rel="noopener">Google Flow Tutorial (free Udemy course)</a> — 40 min, includes consistent characters</li>
+      <li><a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/video-gen-prompt-guide" target="_blank" rel="noopener">Google's official Veo prompt guide</a> — the source of the 7-part prompt</li>
+      <li><a href="https://www.leonardo.ai/news/mastering-prompts-for-veo-3" target="_blank" rel="noopener">Mastering prompts for Veo 3.1</a> — shot types and camera language</li>
+      <li><a href="https://vidiq.com/blog/post/get-more-views-youtube-shorts/" target="_blank" rel="noopener">How to get more views on Shorts</a> — vidIQ, for month 3</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>YouTube searches that work</h3>
+    <ul class="clean">
+      <li><a href="https://www.youtube.com/results?search_query=google+flow+veo+3.1+tutorial+beginners" target="_blank" rel="noopener">Google Flow Veo 3.1 tutorial for beginners</a></li>
+      <li><a href="https://www.youtube.com/results?search_query=nano+banana+consistent+character+veo" target="_blank" rel="noopener">Nano Banana consistent character + Veo</a></li>
+      <li><a href="https://www.youtube.com/results?search_query=kling+ai+free+tutorial" target="_blank" rel="noopener">Kling AI free tutorial</a></li>
+      <li><a href="https://www.youtube.com/results?search_query=VN+video+editor+reels+tutorial" target="_blank" rel="noopener">VN Video Editor reels tutorial</a></li>
+      <li><a href="https://www.youtube.com/results?search_query=AI+short+film+storyboard+workflow" target="_blank" rel="noopener">AI short film storyboard workflow</a></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Later, if you get serious</h3>
+    <p><b>Curious Refuge</b> runs a well-known (paid, pricey) AI filmmaking course used by industry folks. Only worth it once you're sure you love this. Free tutorials are plenty for the first 90 days.</p>
+  </div>
+</section>
+
+<footer>
+  Made with ❤️ for my sister.<br>Start small, post often, and enjoy it. 🎬
+</footer>
+</main>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+// storage helpers (safe)
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1500)}
+function copyText(txt){
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(()=>toast('Copied! ✨'),fallback)}else fallback();
+  function fallback(){const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Copied! ✨')}catch(e){toast('Long-press to copy')}ta.remove()}
+}
+
+// progress
+const done=store.get('reellab-done')||{};
+const boxes=[...document.querySelectorAll('.task input')];
+boxes.forEach(b=>{b.checked=!!done[b.id];b.addEventListener('change',()=>{done[b.id]=b.checked;store.set('reellab-done',done);updateBars(); if(b.checked) toast('Nice work! 🎉')})});
+function updateBars(){['m1','m2','m3'].forEach(m=>{const bs=[...document.querySelectorAll(`[data-month="${m}"] input`)];const c=bs.filter(x=>x.checked).length;const pct=Math.round(c/bs.length*100);document.querySelector(`[data-bar="${m}"]`).style.width=pct+'%';document.querySelector(`[data-barlabel="${m}"]`).textContent=`${c} of ${bs.length} done · ${pct}%`})}
+updateBars();
+
+// tool tabs
+document.querySelectorAll('#tooltabs button').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('#tooltabs button').forEach(x=>x.classList.remove('on'));btn.classList.add('on');
+  document.querySelectorAll('[data-panel]').forEach(p=>p.classList.toggle('hide',p.dataset.panel!==btn.dataset.t));
+}));
+
+// prompt lab
+const ids=['shot','subject','action','scene','camera','style','audio','neg'];
+const saved=store.get('reellab-prompt')||{};
+ids.forEach(i=>{const el=document.getElementById('f-'+i);el.value=saved[i]||'';el.addEventListener('input',build)});
+document.querySelectorAll('.chips').forEach(c=>c.addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;const el=document.getElementById(c.dataset.for);el.value=e.target.textContent;build()}));
+function v(i){return document.getElementById('f-'+i).value.trim()}
+function build(){
+  const s={};ids.forEach(i=>s[i]=v(i));store.set('reellab-prompt',s);
+  const who=[s.subject,s.action].filter(Boolean).join(' who ');
+  let main=s.shot&&who?s.shot+' of '+who:(s.shot||who);
+  if(s.scene) main=main?main+', '+s.scene:s.scene;
+  let parts=[];
+  if(main) parts.push(main.charAt(0).toUpperCase()+main.slice(1)+'.');
+  if(s.camera) parts.push('Camera: '+s.camera+'.');
+  if(s.style) parts.push('Style: '+s.style+'.');
+  if(s.audio) parts.push('Audio: '+s.audio+'.');
+  parts.push('Vertical 9:16.');
+  let out=parts.join(' ');
+  if(s.neg) out+='\n\nNegative prompt: '+s.neg;
+  document.getElementById('prompt-out').textContent=(main||s.camera||s.style)?out:'Your prompt will appear here as you type…';
+}
+build();
+document.getElementById('copy-prompt').addEventListener('click',()=>copyText(document.getElementById('prompt-out').textContent));
+document.getElementById('clear-prompt').addEventListener('click',()=>{ids.forEach(i=>document.getElementById('f-'+i).value='');build()});
+document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copyText(document.getElementById(b.dataset.copy).textContent)));
+</script>
+</body>
+</html>
